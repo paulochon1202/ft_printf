@@ -6,14 +6,14 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:07:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/01/31 21:26:58 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:36:59 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-void	ft_printesp(nb)
+void	ft_printespchar(nb)
 {
 	int	i;
 
@@ -26,12 +26,15 @@ void	ft_printesp(nb)
 }
 
 
-int		ft_printchar(int m, int w, int nb, char c)
+int		ft_printchar(int m, int w, int nb, int n)
 {
+	unsigned char	c;
+
+	c = n;
 	if (m == 0)
 	{
 		if (w == 1)
-			ft_printesp(nb);
+			ft_printespchar(nb);
 		write(1, &c, 1);
 		return (0);
 	}
@@ -39,13 +42,13 @@ int		ft_printchar(int m, int w, int nb, char c)
 	{
 		write(1, &c, 1);
 		if (w == 1)
-			ft_printesp(nb);
+			ft_printespchar(nb);
 		return (0);
 	}
 	return (0);
 }
 
-int	main()
+/*int	main()
 {
 	printf("%-10c", 'c');
 	printf("finis");
@@ -53,4 +56,4 @@ int	main()
 	ft_printchar(1, 1, 10, 'c');
 	printf("finis");
 	return (0);
-}
+}*/
