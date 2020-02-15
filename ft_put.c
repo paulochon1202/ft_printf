@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/13 16:04:11 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:41:04 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,22 +161,3 @@ void	ft_printnbr(int tab[7], int nb)
 			ft_preci(nb, tab[4], tab[5], tab[0]);
 	}
 }
-
-/*int		main()
-{
-	int	tab[7];
-
-	tab[0] = 0;
-	tab[1] = 0;
-	tab[2] = 1;
-	tab[3] = 1;
-	tab[4] = 10;
-	tab[5] = 10;
-	tab[6] = 0;
-	ft_printnbr(tab, 10);
-	printf("finis");
-	printf("\n");
-	printf("%10.10d", 10);
-	printf("finis");
-	return (0);
-}*/

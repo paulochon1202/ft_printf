@@ -6,17 +6,17 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:50:00 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/13 13:19:34 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:47:38 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 void	ft_putcharunsign(char c)
 {
 	write(1, &c, 1);
 }
+
 void	ft_putnbr_fdunsign(unsigned int nb, int fd)
 {
 	if (nb >= 10)
@@ -36,7 +36,7 @@ void	ft_putunsign(char c, int i)
 void	ft_put_espunsign(unsigned int nb, int n, int m)
 {
 	unsigned int		save;
-	int		i;
+	int					i;
 
 	i = 1;
 	save = nb;
@@ -61,7 +61,7 @@ void	ft_put_espunsign(unsigned int nb, int n, int m)
 int		ft_put_0unsign(unsigned int nb, int n)
 {
 	unsigned int		save;
-	int		i;
+	int					i;
 
 	i = 1;
 	save = nb;
@@ -144,22 +144,3 @@ void	ft_printunsigned(int tab[7], unsigned int nb)
 			ft_preciunsign(nb, tab[4], tab[5], tab[0]);
 	}
 }
-
-/*int		main()
-{
-	int	tab[7];
-
-	tab[0] = 0;
-	tab[1] = 0;
-	tab[2] = 1;
-	tab[3] = 1;
-	tab[4] = 10;
-	tab[5] = 10;
-	tab[6] = 0;
-	ft_printnbr(tab, -10);
-	printf("finis");
-	printf("\n");
-	printf("%10.10u", -10);
-	printf("finis");
-	return (0);
-}*/

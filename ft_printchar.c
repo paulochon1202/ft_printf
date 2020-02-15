@@ -6,12 +6,11 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:07:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/13 14:36:59 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:34:40 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 void	ft_printespchar(nb)
 {
@@ -47,13 +46,3 @@ int		ft_printchar(int m, int w, int nb, int n)
 	}
 	return (0);
 }
-
-/*int	main()
-{
-	printf("%-10c", 'c');
-	printf("finis");
-	printf("\n");
-	ft_printchar(1, 1, 10, 'c');
-	printf("finis");
-	return (0);
-}*/

@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 03:02:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/13 13:18:53 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:39:02 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ void	ft_putstr(char *str)
 		i++;
 	while (i != -1)
 	{
-		write(1, &str[i], 1);	
+		write(1, &str[i], 1);
 		i--;
 	}
 }
-
 
 char	ft_ext(int d, char c)
 {
@@ -125,41 +124,41 @@ int		ft_put_0hexa(long int nb, int n, char c)
 	return (0);
 }
 
-int		ft_preci2hexa(long int nb, int n, int t, int m, char c)
+int		ft_preci2hexa(long int nb, int *tab, char c)
 {
-	n = n - t;
+	tab[4] = tab[4] - tab[5];
 	if (nb < 0)
-		n--;
-	if (m == 0)
-		ft_puthexa(' ', n);
-	if (nb == 0 && t == 0)
+		tab[4]--;
+	if (tab[0] == 0)
+		ft_puthexa(' ', tab[4]);
+	if (nb == 0 && tab[5] == 0)
 		return (0);
 	if (nb < 0)
 	{
 		write(1, "-", 1);
 		nb = -nb;
 	}
-	ft_puthexa('0', t);
+	ft_puthexa('0', tab[5]);
 	ft_hexa(nb, c);
-	if (m == 1)
-		ft_puthexa(' ', n);
+	if (tab[0] == 1)
+		ft_puthexa(' ', tab[4]);
 	return (0);
 }
 
-int		ft_precihexa(long int nb, int n, int t, int m, char c)
+int		ft_precihexa(long int nb, int *tab, char c)
 {
 	int	i;
 
 	i = ft_hexlen(nb);
-	n = n - i;
-	t = t - i;
-	if (n <= t)
+	tab[4] = tab[4] - i;
+	tab[5] = tab[5] - i;
+	if (tab[4] <= tab[5])
 	{
-		ft_puthexa('0', t);
+		ft_puthexa('0', tab[5]);
 		ft_hexa(nb, c);
 	}
 	else
-		ft_preci2hexa(nb, n, t, m, c);
+		ft_preci2hexa(nb, tab, c);
 	return (0);
 }
 
@@ -179,7 +178,7 @@ void	ft_printhexa(int tab[7], long int nb, char c)
 		if (tab[3] == 0 && tab[1] == 1)
 			ft_put_0hexa(nb, tab[4], c);
 		if (tab[3] == 1)
-			ft_precihexa(nb, tab[4], tab[5], tab[0], c);
+			ft_precihexa(nb, tab, c);
 	}
 }
 
@@ -187,31 +186,7 @@ void	ft_printpoint(int tab[7], void *vo, char c)
 {
 	long int	nb;
 
-	nb = (long int) vo;
+	nb = (long int)vo;
 	write(1, "0x", 2);
 	ft_put_esphexa(nb, tab[4], tab[0], c);
 }
-
-/*int		main()
-{
-	int	tab[7];
-	char	*str;
-
-	tab[0] = 0;
-	tab[1] = 0;
-	tab[2] = 0;
-	tab[3] = 0;
-	tab[4] = 0;
-	tab[5] = 0;
-	tab[6] = 0;
-
-	str = "poulet";
-	ft_printpoint(tab, str, 'x');
-	printf("finis");
-	printf("\n");
-	printf("%p", str);
-	printf("finis");
-	return (0);
-}*/
-
-
