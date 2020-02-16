@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 16:52:11 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/15 14:14:25 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/16 19:38:45 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_conv(int tab[7], char c, va_list list)
 		tab[0] = 1;
 	}
 	if (c == 'c')
-		ft_printchar(tab[0], tab[2], tab[4], va_arg(list, int));
+		ft_printchar(tab, va_arg(list, int));
 	if (c == 's')
 		ft_printstr(tab, va_arg(list, char *));
 	if (c == 'i' || c == 'd')
@@ -32,15 +32,18 @@ void	ft_conv(int tab[7], char c, va_list list)
 		ft_printunsigned(tab, va_arg(list, int));
 	if (c == 'p')
 		ft_printpoint(tab, va_arg(list, void *), c);
+	if (c == '%')
+		ft_printchar(tab, '%');
 }
 
 int		ft_printf(const char *format, ...)
 {
 	va_list	list;
-	int		tab[7];
+	int		tab[8];
 	char	c;
 
 	tab[6] = 0;
+	tab[7] = 0;
 	va_start(list, format);
 	while (format[tab[6]] != '\0')
 	{
@@ -48,6 +51,7 @@ int		ft_printf(const char *format, ...)
 		{
 			write(1, &format[tab[6]], 1);
 			tab[6]++;
+			tab[7]++;
 		}
 		tab[6]++;
 		(format[tab[6]] == '-') ? tab[0] = 1 && tab[6]++ : (tab[0] = 0);
@@ -81,8 +85,19 @@ int		ft_printf(const char *format, ...)
 		{
 			write(1, &format[tab[6]], 1);
 			tab[6]++;
+			tab[7]++;
 		}
 	}
 	va_end(list);
-	return (tab[6]);
+	return (tab[7]);
 }
+/*
+int	main()
+{
+	ft_printf("%%i\n");
+	//ft_printf("||Y Returned: %d ||\n\n", ft_printf("%-20.d\n", 0));
+	//printf("||N Returned: %d ||\n\n", printf("%-20.d\n", 0));
+//	printf("rendu de ft : %d\n", ft_printf("%020.15d\n", -2147483647 - 1));
+	printf("%%i\n");
+	return (0);
+}*/

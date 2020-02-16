@@ -6,48 +6,50 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/14 15:41:04 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/16 18:15:46 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_putchar_fd(char c, int fd, int *tab)
 {
 	write(fd, &c, 1);
+	tab[7]++;
 }
 
-void	ft_putnbr_fd(int nb, int fd)
+void	ft_putnbr_fd(long int nb, int fd, int *tab)
 {
 	if (nb < 0)
 	{
-		ft_putchar_fd('-', fd);
+		ft_putchar_fd('-', fd, tab);
 		if (nb == -2147483648)
 		{
-			ft_putchar_fd('2', fd);
+			ft_putchar_fd('2', fd, tab);
 			nb = -147483648;
 		}
 		nb = -nb;
 	}
 	if (nb >= 10)
-		ft_putnbr_fd(nb / 10, fd);
-	ft_putchar_fd('0' + nb % 10, fd);
+		ft_putnbr_fd(nb / 10, fd, tab);
+	ft_putchar_fd('0' + nb % 10, fd, tab);
 }
 
-void	ft_put(char c, int i)
+void	ft_put(char c, int i, int *tab)
 {
 	while (i > 0)
 	{
 		write(1, &c, 1);
+		tab[7]++;
 		i--;
 	}
 }
 
-void	ft_put_esp(int nb, int n, int m)
+void	ft_put_esp(long int nb, int n, int m, int *tab)
 {
-	int		save;
-	int		i;
+	long int	save;
+	int			i;
 
 	i = 0;
 	save = nb;
@@ -59,22 +61,24 @@ void	ft_put_esp(int nb, int n, int m)
 		save = save / 10;
 	}
 	n = n - i;
+	if (nb < 0)
+		n--;
 	if (m == 0)
 	{
-		ft_put(' ', n);
-		ft_putnbr_fd(nb, 1);
+		ft_put(' ', n, tab);
+		ft_putnbr_fd(nb, 1, tab);
 	}
 	if (m == 1)
 	{
-		ft_putnbr_fd(nb, 1);
-		ft_put(' ', n);
+		ft_putnbr_fd(nb, 1, tab);
+		ft_put(' ', n, tab);
 	}
 }
 
-int		ft_put_0(int nb, int n)
+int		ft_put_0(long int nb, int n, int *tab)
 {
-	int		save;
-	int		i;
+	long int	save;
+	int			i;
 
 	i = 1;
 	save = nb;
@@ -90,74 +94,79 @@ int		ft_put_0(int nb, int n)
 	if (nb < 0)
 	{
 		write(1, "-", 1);
+		tab[7]++;
 		nb = -nb;
 	}
 	n = n - i;
-	ft_put('0', n);
-	ft_putnbr_fd(nb, 1);
+	ft_put('0', n, tab);
+	ft_putnbr_fd(nb, 1, tab);
 	return (0);
 }
 
-int		ft_preci2(int nb, int n, int t, int m)
+int		ft_preci2(long int nb, int *tab)
 {
-	n = n - t;
+	tab[4] = tab[4] - tab[5];
 	if (nb < 0)
-		n--;
-	if (m == 0)
-		ft_put(' ', n);
-	if (nb == 0 && t == 0)
+		tab[4]--;
+	if (tab[0] == 0)
+		ft_put(' ', tab[4], tab);
+	if (nb == 0 && tab[5] == 0)
+	{
+		ft_put(' ', tab[4], tab);
 		return (0);
+	}
 	if (nb < 0)
 	{
 		write(1, "-", 1);
+		tab[7]++;
 		nb = -nb;
 	}
-	ft_put('0', t);
-	ft_putnbr_fd(nb, 1);
-	if (m == 1)
-		ft_put(' ', n);
+	ft_put('0', tab[5], tab);
+	ft_putnbr_fd(nb, 1, tab);
+	if (tab[0] == 1)
+		ft_put(' ', tab[4], tab);
 	return (0);
 }
 
-int		ft_preci(int nb, int n, int t, int m)
+int		ft_preci(long int nb, int *tab)
 {
-	int		save;
+	long int	save;
 
 	save = nb;
 	if (save < 0)
 		save = -save;
 	while (save > 0)
 	{
-		n--;
-		t--;
+		tab[4]--;
+		tab[5]--;
 		save = save / 10;
 	}
-	if (n <= t)
+	if (tab[4] <= tab[5])
 	{
-		ft_put('0', t);
-		ft_putnbr_fd(nb, 1);
+		ft_put('0', tab[5], tab);
+		ft_putnbr_fd(nb, 1, tab);
 	}
 	else
-		ft_preci2(nb, n, t, m);
+		ft_preci2(nb, tab);
 	return (0);
 }
 
-void	ft_printnbr(int tab[7], int nb)
+void	ft_printnbr(int tab[8], int nb)
 {
 	if (tab[2] == 0)
 	{
 		if (tab[3] == 0)
-			ft_putnbr_fd(nb, 1);
+			ft_putnbr_fd(nb, 1, tab);
 		else
-			ft_put_0(nb, tab[5]);
+			ft_put_0(nb, tab[5], tab);
 	}
 	else
 	{
 		if (tab[3] == 0 && tab[1] == 0)
-			ft_put_esp(nb, tab[4], tab[0]);
+			ft_put_esp(nb, tab[4], tab[0], tab);
 		if (tab[3] == 0 && tab[1] == 1)
-			ft_put_0(nb, tab[4]);
+			ft_put_0(nb, tab[4], tab);
 		if (tab[3] == 1)
-			ft_preci(nb, tab[4], tab[5], tab[0]);
+			ft_preci(nb, tab);
 	}
 }

@@ -6,14 +6,14 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:41:55 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/14 15:41:45 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/16 19:28:54 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-void	ft_str(char *str, int n)
+void	ft_str(char *str, int n, int *tab)
 {
 	int	i;
 
@@ -21,6 +21,7 @@ void	ft_str(char *str, int n)
 	while (i < n)
 	{
 		write(1, &str[i], 1);
+		tab[7]++;
 		i++;
 	}
 }
@@ -35,7 +36,7 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_printespstr(nb)
+void	ft_printespstr(int nb, int *tab)
 {
 	int	i;
 
@@ -43,29 +44,30 @@ void	ft_printespstr(nb)
 	while (i < nb)
 	{
 		write(1, " ", 1);
+		tab[7]++;
 		i++;
 	}
 }
 
-int	ft_nopreci(int tab[7], int t, char *str)
+int	ft_nopreci(int tab[8], int t, char *str)
 {
 	if (tab[0] == 0)
 	{
 		if (tab[2] == 1)
-			ft_printespstr(tab[4] - t);
-		ft_str(str, t);
+			ft_printespstr(tab[4] - t, tab);
+		ft_str(str, t, tab);
 		return (0);
 	}
 	if (tab[0] == 1)
 	{
-		ft_str(str, t);
+		ft_str(str, t, tab);
 		if (tab[2] == 1)
-			ft_printespstr(tab[4] - t);
+			ft_printespstr(tab[4] - t, tab);
 		return (0);
 	}
 	return (0);
 }
-int	ft_printstr(int tab[7], char *str)
+int	ft_printstr(int tab[8], char *str)
 {
 	int	i;
 	int	t;
