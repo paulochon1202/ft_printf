@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 03:02:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/16 18:32:23 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/17 18:03:26 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_putstr(char *str, int *tab)
 	i = 0;
 	while (str[i] != '\0')
 		i++;
-	while (i != -1)
+	i--;
+	while (i >= 0)
 	{
 		write(1, &str[i], 1);
 		tab[7]++;
@@ -45,11 +46,13 @@ char	ft_ext(int d, char c)
 	return (a);
 }
 
-int		ft_hexlen(unsigned int n)
+int		ft_hexlen(long int n)
 {
 	int	i;
 
 	i = 0;
+	if (n == 0)
+		i++;
 	while (n > 0)
 	{
 		n = n / 16;
@@ -60,13 +63,15 @@ int		ft_hexlen(unsigned int n)
 
 int		ft_hexa(unsigned long int t, char c, int *tab)
 {
-	int		nbr;
+	unsigned long int		nbr;
 	int		d;
 	char	*str;
 
 	d = -1;
 	if (!(str = malloc(sizeof(char) * (ft_hexlen(t) + 1))))
 		return (0);
+	if (t == 0)
+		str[0] = '0';
 	while (t > 0)
 	{
 		nbr = t % 16;
@@ -90,7 +95,7 @@ void	ft_puthexa(char c, int i, int *tab)
 	}
 }
 
-void	ft_put_esphexa(long int nb, int *tab, char c)
+void	ft_put_esphexa(unsigned int nb, int *tab, char c)
 {
 	int		i;
 
@@ -108,7 +113,7 @@ void	ft_put_esphexa(long int nb, int *tab, char c)
 	}
 }
 
-int		ft_put_0hexa(long int nb, int n, char c, int *tab)
+int		ft_put_0hexa(unsigned int nb, int n, char c, int *tab)
 {
 	int		i;
 
@@ -127,7 +132,7 @@ int		ft_put_0hexa(long int nb, int n, char c, int *tab)
 	return (0);
 }
 
-int		ft_preci2hexa(long int nb, int *tab, char c)
+int		ft_preci2hexa(unsigned int nb, int *tab, char c)
 {
 	tab[4] = tab[4] - tab[5];
 	if (nb < 0)
@@ -152,7 +157,7 @@ int		ft_preci2hexa(long int nb, int *tab, char c)
 	return (0);
 }
 
-int		ft_precihexa(long int nb, int *tab, char c)
+int		ft_precihexa(unsigned int nb, int *tab, char c)
 {
 	int	i;
 
@@ -169,7 +174,7 @@ int		ft_precihexa(long int nb, int *tab, char c)
 	return (0);
 }
 
-void	ft_printhexa(int tab[8], long int nb, char c)
+void	ft_printhexa(int tab[8], unsigned int nb, char c)
 {
 	if (tab[2] == 0)
 	{

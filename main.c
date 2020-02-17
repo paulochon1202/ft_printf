@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 16:52:11 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/16 19:38:45 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/17 18:01:15 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		ft_printf(const char *format, ...)
 			tab[6]++;
 			tab[7]++;
 		}
+		if (format[tab[6]] == '\0')
+			return (tab[7]);
 		tab[6]++;
 		(format[tab[6]] == '-') ? tab[0] = 1 && tab[6]++ : (tab[0] = 0);
 
@@ -94,10 +96,19 @@ int		ft_printf(const char *format, ...)
 /*
 int	main()
 {
-	ft_printf("%%i\n");
-	//ft_printf("||Y Returned: %d ||\n\n", ft_printf("%-20.d\n", 0));
-	//printf("||N Returned: %d ||\n\n", printf("%-20.d\n", 0));
-//	printf("rendu de ft : %d\n", ft_printf("%020.15d\n", -2147483647 - 1));
-	printf("%%i\n");
+//	ft_printf("%-*XJ68BI", 10, -92113801); 
+//	ft_printf("%-.3u", 0); 
+//	ft_printf("%5d1N", 1283278733); 
+//	ft_printf("%4d", 2147483647); 
+//	ft_printf("%1X3oN6v", 0);
+//	ft_printf("\n");
+	ft_printf("%-*XJ68BI%-.3u%5d1N%4d%1X3oN6v\n", 10, -92113801, 0, 1283278733, 2147483647, 1);
+//	printf("%-*XJ68BI", 10, -92113801); 
+//	printf("%-.3u", 0); 
+//	printf("%5d1N", 1283278733); 
+//	printf("%4d", 2147483647); 
+//	printf("%1X3oN6v", 0);
+//	printf("\n");
+	printf("%-*XJ68BI%-.3u%5d1N%4d%1X3oN6v\n", 10, -92113801, 0, 1283278733, 2147483647, 1);
 	return (0);
 }*/

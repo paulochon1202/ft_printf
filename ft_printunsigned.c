@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:50:00 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/16 19:09:24 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:32:17 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_put_espunsign(unsigned long int nb, int n, int m, int *tab)
 	unsigned long int	save;
 	int					i;
 
-	i = 1;
+	i = 0;
 	save = nb;
 	while (save > 0)
 	{

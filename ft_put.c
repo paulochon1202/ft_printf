@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/16 18:15:46 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:19:47 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ int		ft_put_0(long int nb, int n, int *tab)
 
 int		ft_preci2(long int nb, int *tab)
 {
-	tab[4] = tab[4] - tab[5];
+	if (tab[5] > 0)
+		tab[4] = tab[4] - tab[5];
 	if (nb < 0)
 		tab[4]--;
 	if (tab[0] == 0)
