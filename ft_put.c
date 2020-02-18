@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/18 11:45:28 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/18 13:37:19 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,14 @@ int		ft_put_0(long int nb, int n, int *tab)
 	int			i;
 
 	i = 0;
-	save = nb;
-	if (save < 0)
+	if (nb < 0)
 	{
-		save = -save;
+		write(1, "-", 1);
+		tab[7]++;
+		nb = -nb;
 		i++;
 	}
+	save = nb;
 	while (save > 0)
 	{
 		i++;
@@ -94,12 +96,6 @@ int		ft_put_0(long int nb, int n, int *tab)
 	}
 	if (nb == 0 && n == 0)
 		return (0);
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		tab[7]++;
-		nb = -nb;
-	}
 	n = n - i;
 	ft_put('0', n, tab);
 	ft_putnbr_fd(nb, 1, tab);

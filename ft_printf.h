@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:30:06 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/16 19:23:17 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/18 14:59:00 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 #include <stdarg.h>
 
 int     ft_atoiptr(const char *str, int *tab);
-void	ft_printnbr(int tab[7], int nb);
-void	ft_printunsigned(int tab[7], unsigned int nb);
-int		ft_printstr(int tab[7], char *str);
+void	ft_printnbr(int tab[8], int nb);
+void	ft_printunsigned(int tab[8], unsigned int nb);
+int		ft_printstr(int tab[8], char *str);
 int		ft_printchar(int *tab, int n);
-void	ft_printpoint(int tab[7], void *vo, char c);
-void	ft_printhexa(int tab[7], long int nb, char c);
+void	ft_printpoint(int tab[8], void *vo, char c);
+void	ft_printhexa(int tab[8], long int nb, char c);
 
 #endif
 
