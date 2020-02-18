@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/17 15:19:47 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/18 11:45:28 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,13 @@ int		ft_put_0(long int nb, int n, int *tab)
 	long int	save;
 	int			i;
 
-	i = 1;
+	i = 0;
 	save = nb;
 	if (save < 0)
+	{
 		save = -save;
+		i++;
+	}
 	while (save > 0)
 	{
 		i++;
@@ -154,6 +157,8 @@ int		ft_preci(long int nb, int *tab)
 
 void	ft_printnbr(int tab[8], int nb)
 {
+	if (nb == 0)
+		tab[5]--;
 	if (tab[2] == 0)
 	{
 		if (tab[3] == 0)

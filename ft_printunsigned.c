@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:50:00 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/17 15:32:17 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/18 11:23:06 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		ft_put_0unsign(unsigned long int nb, int n, int *tab)
 	unsigned long int	save;
 	int					i;
 
-	i = 1;
+	i = 0;
 	save = nb;
 	while (save > 0)
 	{
@@ -88,21 +88,14 @@ int		ft_put_0unsign(unsigned long int nb, int n, int *tab)
 
 int		ft_preci2unsign(unsigned int nb, int *tab)
 {
-	tab[4] = tab[4] - tab[5];
-	if (nb < 0)
-		tab[4]--;
+	if (tab[5] > 0)
+		tab[4] = tab[4] - tab[5];
 	if (tab[0] == 0)
 		ft_putunsign(' ', tab[4], tab);
 	if (nb == 0 && tab[5] == 0)
 	{
 		ft_putunsign(' ', tab[4], tab);
 		return (0);
-	}
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		tab[7]++;
-		nb = -nb;
 	}
 	ft_putunsign('0', tab[5], tab);
 	ft_putnbr_fdunsign(nb, 1, tab);
@@ -116,6 +109,11 @@ int		ft_preciunsign(unsigned long int nb, int *tab)
 	unsigned long int		save;
 
 	save = nb;
+	if (nb == 0)
+	{
+		tab[4]--;
+		tab[5]--;
+	}
 	while (save > 0)
 	{
 		tab[4]--;
@@ -134,6 +132,8 @@ int		ft_preciunsign(unsigned long int nb, int *tab)
 
 void	ft_printunsigned(int tab[8], unsigned int nb)
 {
+	if (tab[5] < 0)
+		tab[3] = 0;
 	if (tab[2] == 0)
 	{
 		if (tab[3] == 0)

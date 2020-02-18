@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 03:02:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/17 18:03:26 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/18 10:09:01 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ int		ft_put_0hexa(unsigned int nb, int n, char c, int *tab)
 
 int		ft_preci2hexa(unsigned int nb, int *tab, char c)
 {
-	tab[4] = tab[4] - tab[5];
+	if (tab[5] > 0)
+		tab[4] = tab[4] - tab[5];
 	if (nb < 0)
 		tab[4]--;
 	if (tab[0] == 0)
