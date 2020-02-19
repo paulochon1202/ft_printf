@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/18 13:37:19 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/19 16:05:46 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	ft_put_esp(long int nb, int n, int m, int *tab)
 		i++;
 		save = save / 10;
 	}
+	if (nb == 0)
+		i++;
 	n = n - i;
 	if (nb < 0)
 		n--;
@@ -89,6 +91,8 @@ int		ft_put_0(long int nb, int n, int *tab)
 		i++;
 	}
 	save = nb;
+	if (nb == 0)
+		i++;
 	while (save > 0)
 	{
 		i++;
@@ -98,6 +102,7 @@ int		ft_put_0(long int nb, int n, int *tab)
 		return (0);
 	n = n - i;
 	ft_put('0', n, tab);
+//	if (nb != 0)
 	ft_putnbr_fd(nb, 1, tab);
 	return (0);
 }
@@ -108,13 +113,13 @@ int		ft_preci2(long int nb, int *tab)
 		tab[4] = tab[4] - tab[5];
 	if (nb < 0)
 		tab[4]--;
-	if (tab[0] == 0)
-		ft_put(' ', tab[4], tab);
 	if (nb == 0 && tab[5] == 0)
 	{
 		ft_put(' ', tab[4], tab);
 		return (0);
 	}
+	if (tab[0] == 0)
+		ft_put(' ', tab[4], tab);
 	if (nb < 0)
 	{
 		write(1, "-", 1);
@@ -143,17 +148,17 @@ int		ft_preci(long int nb, int *tab)
 	}
 	if (tab[4] <= tab[5])
 	{
-		ft_put('0', tab[5], tab);
+		write(1, "tu\n", 3);
 		ft_putnbr_fd(nb, 1, tab);
 	}
 	else
-		ft_preci2(nb, tab);
+	ft_preci2(nb, tab);
 	return (0);
 }
 
 void	ft_printnbr(int tab[8], int nb)
 {
-	if (nb == 0)
+	if (nb == 0 && tab[5] != 0)
 		tab[5]--;
 	if (tab[2] == 0)
 	{
