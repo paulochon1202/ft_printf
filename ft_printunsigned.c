@@ -6,11 +6,12 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:50:00 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/18 11:23:06 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:25:53 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 
 void	ft_putcharunsign(char c, int fd, int *tab)
 {
@@ -42,6 +43,8 @@ void	ft_put_espunsign(unsigned long int nb, int n, int m, int *tab)
 
 	i = 0;
 	save = nb;
+	if (nb == 0)
+		i++;
 	while (save > 0)
 	{
 		i++;
@@ -67,6 +70,8 @@ int		ft_put_0unsign(unsigned long int nb, int n, int *tab)
 
 	i = 0;
 	save = nb;
+	if (nb == 0)
+		i++;
 	while (save > 0)
 	{
 		i++;
@@ -90,13 +95,13 @@ int		ft_preci2unsign(unsigned int nb, int *tab)
 {
 	if (tab[5] > 0)
 		tab[4] = tab[4] - tab[5];
-	if (tab[0] == 0)
-		ft_putunsign(' ', tab[4], tab);
 	if (nb == 0 && tab[5] == 0)
 	{
 		ft_putunsign(' ', tab[4], tab);
 		return (0);
 	}
+	if (tab[0] == 0)
+		ft_putunsign(' ', tab[4], tab);
 	ft_putunsign('0', tab[5], tab);
 	ft_putnbr_fdunsign(nb, 1, tab);
 	if (tab[0] == 1)
@@ -109,11 +114,6 @@ int		ft_preciunsign(unsigned long int nb, int *tab)
 	unsigned long int		save;
 
 	save = nb;
-	if (nb == 0)
-	{
-		tab[4]--;
-		tab[5]--;
-	}
 	while (save > 0)
 	{
 		tab[4]--;

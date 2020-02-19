@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 03:02:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/18 16:06:22 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/19 17:50:33 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_puthexa(char c, int i, int *tab)
 	}
 }
 
-void	ft_put_esphexa(unsigned int nb, int *tab, char c)
+void	ft_put_esphexa(unsigned long int nb, int *tab, char c)
 {
 	int		i;
 
@@ -117,7 +117,7 @@ void	ft_put_esphexa(unsigned int nb, int *tab, char c)
 	}
 }
 
-int		ft_put_0hexa(unsigned int nb, int n, char c, int *tab)
+int		ft_put_0hexa(unsigned long int nb, int n, char c, int *tab)
 {
 	int		i;
 
@@ -136,7 +136,7 @@ int		ft_put_0hexa(unsigned int nb, int n, char c, int *tab)
 	return (0);
 }
 
-int		ft_preci2hexa(unsigned int nb, int *tab, char c)
+int		ft_preci2hexa(unsigned long int nb, int *tab, char c)
 {
 	if (tab[5] > 0)
 		tab[4] = tab[4] - tab[5];
@@ -162,7 +162,7 @@ int		ft_preci2hexa(unsigned int nb, int *tab, char c)
 	return (0);
 }
 
-int		ft_precihexa(unsigned int nb, int *tab, char c)
+int		ft_precihexa(unsigned long int nb, int *tab, char c)
 {
 	int	i;
 
@@ -179,8 +179,14 @@ int		ft_precihexa(unsigned int nb, int *tab, char c)
 	return (0);
 }
 
-void	ft_printhexa(int tab[8], unsigned int nb, char c)
+void	ft_printhexa(int tab[8], unsigned long int nb, char c)
 {
+	if (c == 'p')
+	{
+		write(1, "0x", 2);
+		tab[7] = tab[7] + 2;
+		c = 'x';
+	}
 	if (tab[2] == 0)
 	{
 		if (tab[3] == 0)
@@ -201,9 +207,9 @@ void	ft_printhexa(int tab[8], unsigned int nb, char c)
 
 void	ft_printpoint(int tab[8], void *vo, char c)
 {
-	unsigned int	nb;
+	unsigned long int	nb;
 
-	nb = (unsigned int)vo;
+	nb = (unsigned long int)vo;
 	write(1, "0x", 2);
 	tab[7] = tab[7] + 2;
 	ft_printhexa(tab, nb, c);
