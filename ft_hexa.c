@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 03:02:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/20 14:48:17 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:52:06 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ int		ft_hexa(unsigned long int t, char c, int *tab)
 	unsigned long int		nbr;
 	int		d;
 	char	*str;
+	int	hexlen;
 
 	d = -1;
-	if (!(str = malloc(sizeof(char) * (ft_hexlen(t, tab) + 1))))
+	hexlen = ft_hexlen(t, tab);
+	if (!(str = malloc(sizeof(char) * (hexlen + 1))))
 		return (0);
 	if (t == 0)
 		str[0] = '0';
@@ -85,7 +87,9 @@ int		ft_hexa(unsigned long int t, char c, int *tab)
 		else
 			str[++d] = nbr + '0';
 	}
+	str[hexlen] = '\0';
 	ft_putstr(str, tab);
+	free(str);
 	return (0);
 }
 
@@ -179,7 +183,7 @@ int		ft_precihexa(unsigned long int nb, int *tab, char c)
 	return (0);
 }
 
-void	ft_printhexa(int tab[8], unsigned long int nb, char c)
+void	ft_printhexa(int tab[8], unsigned int nb, char c)
 {
 	if (tab[2] == 0)
 	{

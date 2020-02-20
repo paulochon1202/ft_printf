@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 16:52:11 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/20 15:15:08 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:28:54 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		ft_printf(const char *format, ...)
 	va_end(list);
 	return (tab[7]);
 }
-
+/*
 int	main()
 {
 //	ft_printf("||Returned: %d ||\n\n", ft_printf("44\tAddress %p\n", 140732897249832));
@@ -101,4 +101,4 @@ int	main()
 	ft_printf("||Returned: %d ||\n\n", ft_printf("46\tAddress %-.15p\n", 140732656753192));
 	printf("||Returned: %d ||\n\n", printf("46\tAddress %-.15p\n", 140732656753192));
 	return (0);
-}
+}*/
