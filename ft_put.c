@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/19 16:05:46 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:57:24 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	ft_put_esp(long int nb, int n, int m, int *tab)
 
 	i = 0;
 	save = nb;
-	if (save < 0)
-		save = -save;
+	(nb < 0) ? (save = -save) && i-- : save;
 	while (save > 0)
 	{
 		i++;
@@ -63,8 +62,6 @@ void	ft_put_esp(long int nb, int n, int m, int *tab)
 	if (nb == 0)
 		i++;
 	n = n - i;
-	if (nb < 0)
-		n--;
 	if (m == 0)
 	{
 		ft_put(' ', n, tab);
@@ -102,7 +99,6 @@ int		ft_put_0(long int nb, int n, int *tab)
 		return (0);
 	n = n - i;
 	ft_put('0', n, tab);
-//	if (nb != 0)
 	ft_putnbr_fd(nb, 1, tab);
 	return (0);
 }
@@ -152,7 +148,7 @@ int		ft_preci(long int nb, int *tab)
 		ft_putnbr_fd(nb, 1, tab);
 	}
 	else
-	ft_preci2(nb, tab);
+		ft_preci2(nb, tab);
 	return (0);
 }
 

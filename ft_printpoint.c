@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 14:42:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/20 15:14:16 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:48:37 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ int		ft_hexlenpoint(long int n, int *tab)
 
 int		ft_point(unsigned long int t, char c, int *tab)
 {
-	unsigned long int		nbr;
-	int		d;
-	char	*str;
+	unsigned long int	nbr;
+	int					d;
+	char				*str;
+	int					pointlen;
 
 	d = -1;
-	if (!(str = malloc(sizeof(char) * (ft_hexlenpoint(t, tab) + 1))))
+	pointlen = ft_hexlenpoint(t, tab);
+	if (!(str = malloc(sizeof(char) * (pointlen + 1))))
 		return (0);
 	if (t == 0)
 		str[0] = '0';
@@ -85,7 +87,9 @@ int		ft_point(unsigned long int t, char c, int *tab)
 		else
 			str[++d] = nbr + '0';
 	}
+	str[pointlen] = '\0';
 	ft_putstrpoint(str, tab);
+	free(str);
 	return (0);
 }
 

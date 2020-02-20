@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:41:55 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/16 19:28:54 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:37:52 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_printespstr(int nb, int *tab)
 	}
 }
 
-int	ft_nopreci(int tab[8], int t, char *str)
+int		ft_nopreci(int tab[8], int t, char *str)
 {
 	if (tab[0] == 0)
 	{
@@ -67,7 +67,8 @@ int	ft_nopreci(int tab[8], int t, char *str)
 	}
 	return (0);
 }
-int	ft_printstr(int tab[8], char *str)
+
+int		ft_printstr(int tab[8], char *str)
 {
 	int	i;
 	int	t;
@@ -77,12 +78,12 @@ int	ft_printstr(int tab[8], char *str)
 		str = "(null)";
 	t = ft_strlen(str);
 	if (tab[3] == 0)
-		ft_nopreci(tab, t, str);	
+		ft_nopreci(tab, t, str);
 	if (tab[3] == 1)
 	{
 		if (tab[5] > t)
 			ft_nopreci(tab, t, str);
-		else 
+		else
 			ft_nopreci(tab, tab[5], str);
 	}
 	return (0);
