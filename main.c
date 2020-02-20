@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 16:52:11 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/19 17:50:57 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:15:08 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	ft_conv(int tab[8], char c, va_list list)
 	if (c == 'u')
 		ft_printunsigned(tab, va_arg(list, int));
 	if (c == 'p')
-		ft_printhexa(tab, va_arg(list, long int), c);
-	if (c == 'w')
-		ft_printpoint(tab, va_arg(list, void *), c);
+		ft_printpoint(tab, va_arg(list, unsigned long int), 'x');
 	if (c == '%')
 		ft_printchar(tab, '%');
 }
@@ -98,9 +96,9 @@ int	main()
 {
 //	ft_printf("||Returned: %d ||\n\n", ft_printf("44\tAddress %p\n", 140732897249832));
 //	printf("||Returned: %d ||\n\n", printf("44\tAddress %p\n", 140732897249832));
-	ft_printf("||Returned: %d ||\n\n", ft_printf("45\tAddress %20p\n", 140732856650280));
-	printf("||Returned: %d ||\n\n", printf("45\tAddress %20p\n", 140732856650280));
-//	ft_printf("||Returned: %d ||\n\n", ft_printf("46\tAddress %-20p\n", 140732656753192));
-//	printf("||Returned: %d ||\n\n", printf("46\tAddress %-20p\n", 140732656753192));
+//	ft_printf("||Returned: %d ||\n\n", ft_printf("45\tAddress %-20p\n", 140732856650280));
+//	printf("||Returned: %d ||\n\n", printf("45\tAddress %-20p\n", 140732856650280));
+	ft_printf("||Returned: %d ||\n\n", ft_printf("46\tAddress %-.15p\n", 140732656753192));
+	printf("||Returned: %d ||\n\n", printf("46\tAddress %-.15p\n", 140732656753192));
 	return (0);
 }

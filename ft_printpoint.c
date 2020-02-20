@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexa.c                                          :+:      :+:    :+:   */
+/*   ft_printpoint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/09 03:02:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/20 14:48:17 by paboutel         ###   ########.fr       */
+/*   Created: 2020/02/20 14:42:07 by paboutel          #+#    #+#             */
+/*   Updated: 2020/02/20 15:14:16 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	ft_putstr(char *str, int *tab)
+void	ft_putstrpoint(char *str, int *tab)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void	ft_putstr(char *str, int *tab)
 	}
 }
 
-char	ft_ext(int d, char c)
+char	ft_extpoint(int d, char c)
 {
 	char	a;
 
@@ -46,7 +46,7 @@ char	ft_ext(int d, char c)
 	return (a);
 }
 
-int		ft_hexlen(long int n, int *tab)
+int		ft_hexlenpoint(long int n, int *tab)
 {
 	int	i;
 
@@ -65,14 +65,14 @@ int		ft_hexlen(long int n, int *tab)
 	return (i);
 }
 
-int		ft_hexa(unsigned long int t, char c, int *tab)
+int		ft_point(unsigned long int t, char c, int *tab)
 {
 	unsigned long int		nbr;
 	int		d;
 	char	*str;
 
 	d = -1;
-	if (!(str = malloc(sizeof(char) * (ft_hexlen(t, tab) + 1))))
+	if (!(str = malloc(sizeof(char) * (ft_hexlenpoint(t, tab) + 1))))
 		return (0);
 	if (t == 0)
 		str[0] = '0';
@@ -81,15 +81,15 @@ int		ft_hexa(unsigned long int t, char c, int *tab)
 		nbr = t % 16;
 		t = t / 16;
 		if (nbr > 9)
-			str[++d] = ft_ext(nbr % 10, c);
+			str[++d] = ft_extpoint(nbr % 10, c);
 		else
 			str[++d] = nbr + '0';
 	}
-	ft_putstr(str, tab);
+	ft_putstrpoint(str, tab);
 	return (0);
 }
 
-void	ft_puthexa(char c, int i, int *tab)
+void	ft_putpoint(char c, int i, int *tab)
 {
 	while (i > 0)
 	{
@@ -99,29 +99,33 @@ void	ft_puthexa(char c, int i, int *tab)
 	}
 }
 
-void	ft_put_esphexa(unsigned long int nb, int *tab, char c)
+void	ft_put_esppoint(unsigned long int nb, int *tab, char c)
 {
 	int		i;
 
-	i = ft_hexlen(nb, tab);
-	tab[4] = tab[4] - i;
+	i = ft_hexlenpoint(nb, tab);
+	tab[4] = tab[4] - i - 2;
 	if (tab[0] == 0)
 	{
-		ft_puthexa(' ', tab[4], tab);
-		ft_hexa(nb, c, tab);
+		ft_putpoint(' ', tab[4], tab);
+		write(1, "0x", 2);
+		tab[7] = tab[7] + 2;
+		ft_point(nb, c, tab);
 	}
 	if (tab[0] == 1)
 	{
-		ft_hexa(nb, c, tab);
-		ft_puthexa(' ', tab[4], tab);
+		write(1, "0x", 2);
+		tab[7] = tab[7] + 2;
+		ft_point(nb, c, tab);
+		ft_putpoint(' ', tab[4], tab);
 	}
 }
 
-int		ft_put_0hexa(unsigned long int nb, int n, char c, int *tab)
+int		ft_put_0point(unsigned long int nb, int n, char c, int *tab)
 {
 	int		i;
 
-	i = ft_hexlen(nb, tab);
+	i = ft_hexlenpoint(nb, tab);
 	if (nb == 0 && n == 0)
 		return (0);
 	if (nb < 0)
@@ -131,70 +135,81 @@ int		ft_put_0hexa(unsigned long int nb, int n, char c, int *tab)
 		nb = -nb;
 	}
 	n = n - i;
-	ft_puthexa('0', n, tab);
-	ft_hexa(nb, c, tab);
+	write(1, "0x", 2);
+	tab[7] = tab[7] + 2;
+	ft_putpoint('0', n, tab);
+	ft_point(nb, c, tab);
 	return (0);
 }
 
-int		ft_preci2hexa(unsigned long int nb, int *tab, char c)
+int		ft_preci2point(unsigned long int nb, int *tab, char c)
 {
 	if (tab[5] > 0)
 		tab[4] = tab[4] - tab[5];
 	if (nb < 0)
 		tab[4]--;
+	tab[4] = tab[4] - 2;
 	if (nb == 0 && tab[5] == 0)
 	{
-		ft_puthexa(' ', tab[4], tab);
+		ft_putpoint(' ', tab[4], tab);
 		return (0);
 	}
 	if (tab[0] == 0)
-		ft_puthexa(' ', tab[4], tab);
+		ft_putpoint(' ', tab[4], tab);
 	if (nb < 0)
 	{
 		write(1, "-", 1);
 		tab[7]++;
 		nb = -nb;
 	}
-	ft_puthexa('0', tab[5], tab);
-	ft_hexa(nb, c, tab);
+	write(1, "0x", 2);
+	tab[7] = tab[7] + 2;
+	ft_putpoint('0', tab[5], tab);
+	ft_point(nb, c, tab);
 	if (tab[0] == 1)
-		ft_puthexa(' ', tab[4], tab);
+		ft_putpoint(' ', tab[4], tab);
 	return (0);
 }
 
-int		ft_precihexa(unsigned long int nb, int *tab, char c)
+int		ft_precipoint(unsigned long int nb, int *tab, char c)
 {
 	int	i;
 
-	i = ft_hexlen(nb, tab);
+	i = ft_hexlenpoint(nb, tab);
 	tab[4] = tab[4] - i;
 	tab[5] = tab[5] - i;
 	if (tab[4] <= tab[5])
 	{
-		ft_puthexa('0', tab[5], tab);
-		ft_hexa(nb, c, tab);
+		write(1, "0x", 2);
+		tab[7] = tab[7] + 2;
+		ft_putpoint('0', tab[5], tab);
+		ft_point(nb, c, tab);
 	}
 	else
-		ft_preci2hexa(nb, tab, c);
+		ft_preci2point(nb, tab, c);
 	return (0);
 }
 
-void	ft_printhexa(int tab[8], unsigned long int nb, char c)
+void	ft_printpoint(int tab[8], unsigned long int nb, char c)
 {
 	if (tab[2] == 0)
 	{
 		if (tab[3] == 0)
-			ft_hexa(nb, c, tab);
+		{
+			write(1, "0x", 2);
+			tab[7] = tab[7] + 2;
+			ft_point(nb, c, tab);
+		}
 		else
-			ft_put_0hexa(nb, tab[5], c, tab);
+			ft_put_0point(nb, tab[5], c, tab);
 	}
 	else
 	{
 		if (tab[3] == 0 && tab[1] == 0)
-			ft_put_esphexa(nb, tab, c);
+			ft_put_esppoint(nb, tab, c);
 		if (tab[3] == 0 && tab[1] == 1)
-			ft_put_0hexa(nb, tab[4], c, tab);
+			ft_put_0point(nb, tab[4], c, tab);
 		if (tab[3] == 1)
-			ft_precihexa(nb, tab, c);
+			ft_precipoint(nb, tab, c);
 	}
 }
