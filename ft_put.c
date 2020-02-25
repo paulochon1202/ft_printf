@@ -6,11 +6,12 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:05:10 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/22 16:28:29 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/25 07:00:36 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void	ft_put_esp(long int nb, int n, int m, int *tab)
 {
@@ -55,13 +56,13 @@ int		ft_put_0(long int nb, int n, int *tab)
 		i++;
 	}
 	save = nb;
-	if (nb == 0)
-		i++;
 	while (save > 0)
 	{
 		i++;
 		save = save / 10;
 	}
+	if (nb == 0)
+		i++;
 	if (nb == 0 && n == 0)
 		return (0);
 	n = n - i;
@@ -89,6 +90,8 @@ int		ft_preci2(long int nb, int *tab)
 		tab[7]++;
 		nb = -nb;
 	}
+	if (nb == 0)
+		tab[5]--;
 	ft_put('0', tab[5], tab);
 	ft_putnbr_fd(nb, 1, tab);
 	if (tab[0] == 1)
@@ -111,8 +114,9 @@ int		ft_preci(long int nb, int *tab)
 	}
 	if (tab[4] <= tab[5])
 	{
-		write(1, "tu\n", 3);
-		ft_putnbr_fd(nb, 1, tab);
+		ft_put('0', tab[5], tab);
+		if (nb != 0)
+			ft_putnbr_fd(nb, 1, tab);
 	}
 	else
 		ft_preci2(nb, tab);
@@ -121,8 +125,12 @@ int		ft_preci(long int nb, int *tab)
 
 void	ft_printnbr(int tab[8], int nb)
 {
-	if (nb == 0 && tab[5] != 0)
-		tab[5]--;
+	if (tab[4] < 0 && tab[1] == 1)
+		tab[1] = 0;
+	if (tab[3] == 1 && tab[5] == 0)
+		tab[1] = 0;
+	if (tab[5] < 0)
+		tab[3] = 0;
 	if (tab[2] == 0)
 	{
 		if (tab[3] == 0)

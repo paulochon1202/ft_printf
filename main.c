@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 16:52:11 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/22 16:12:33 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/25 07:37:52 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_conv(int tab[8], char c, va_list list)
 	{
 		tab[4] = -tab[4];
 		tab[0] = 1;
+		tab[1] = 0;
 	}
 	if (c == 'c')
 		ft_printchar(tab, va_arg(list, int));
@@ -120,4 +121,10 @@ int		ft_printf(const char *format, ...)
 	}
 	va_end(list);
 	return (tab[7]);
+}
+
+int	main(void)
+{
+	ft_printf("%05.*dG\n", 10, 191350883);
+	printf("%05.*dG\n", 10,  191350883);
 }

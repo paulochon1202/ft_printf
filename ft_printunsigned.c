@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:50:00 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/22 16:29:29 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/25 03:30:28 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int		ft_preci2unsign(unsigned int nb, int *tab)
 		ft_putunsign(' ', tab[4], tab);
 		return (0);
 	}
+	if (nb == 0)
+		tab[5]--;
 	if (tab[0] == 0)
 		ft_putunsign(' ', tab[4], tab);
 	ft_putunsign('0', tab[5], tab);
@@ -99,7 +101,8 @@ int		ft_preciunsign(unsigned long int nb, int *tab)
 	if (tab[4] <= tab[5])
 	{
 		ft_putunsign('0', tab[5], tab);
-		ft_putnbr_fdunsign(nb, 1, tab);
+		if (nb != 0)
+			ft_putnbr_fdunsign(nb, 1, tab);
 	}
 	else
 		ft_preci2unsign(nb, tab);

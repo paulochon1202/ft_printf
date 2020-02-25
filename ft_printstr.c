@@ -6,7 +6,7 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:41:55 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/20 18:37:52 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/25 03:37:58 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int		ft_printstr(int tab[8], char *str)
 	int	t;
 
 	i = 0;
+	if (tab[5] < 0)
+		tab[3] = 0;
 	if (!str)
 		str = "(null)";
 	t = ft_strlen(str);

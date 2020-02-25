@@ -6,11 +6,12 @@
 /*   By: paboutel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 03:02:07 by paboutel          #+#    #+#             */
-/*   Updated: 2020/02/22 16:13:35 by paboutel         ###   ########.fr       */
+/*   Updated: 2020/02/25 06:02:28 by paboutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void	ft_put_esphexa(unsigned long int nb, int *tab, char c)
 {
@@ -53,21 +54,15 @@ int		ft_preci2hexa(unsigned long int nb, int *tab, char c)
 {
 	if (tab[5] > 0)
 		tab[4] = tab[4] - tab[5];
-	if (nb < 0)
-		tab[4]--;
 	if (nb == 0 && tab[5] == 0)
 	{
 		ft_puthexa(' ', tab[4], tab);
 		return (0);
 	}
-	if (tab[0] == 0)
+	if (tab[0] == 0 && tab[1] == 0)
 		ft_puthexa(' ', tab[4], tab);
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		tab[7]++;
-		nb = -nb;
-	}
+	if (tab[1] == 1 &&  tab[5] < 0)
+		ft_puthexa('0', tab[4], tab);
 	ft_puthexa('0', tab[5], tab);
 	ft_hexa(nb, c, tab);
 	if (tab[0] == 1)
@@ -94,6 +89,10 @@ int		ft_precihexa(unsigned long int nb, int *tab, char c)
 
 void	ft_printhexa(int tab[8], unsigned int nb, char c)
 {
+	if (tab[5] < 0)
+		tab[3] = 0;
+	if (tab[3] == 1)
+		tab[1] = 0;
 	if (tab[2] == 0)
 	{
 		if (tab[3] == 0)
